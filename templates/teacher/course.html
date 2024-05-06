@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+
+  <body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+      <script>
+        alert("{{ message }}");
+      </script>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <!-- main -->
+
+    {% include 'teacher/navbar.html' %}
+    <!-- Header Start -->
+    <div class="container-fluid page-header" style="margin-bottom: 90px">
+      <div class="container">
+        <div
+          class="d-flex flex-column justify-content-center"
+          style="min-height: 300px"
+        >
+          <h3 class="display-4 text-white text-uppercase">Courses</h3>
+          <div class="d-inline-flex text-white">
+            <p class="m-0 text-uppercase">
+              <a class="text-white" href="">Home</a>
+            </p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">Courses</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Category Start -->
+    <div class="container-fluid py-5">
+      <div class="container pt-5 pb-3">
+        <div class="text-center mb-5">
+          <h1>Your Courses</h1>
+          <a class="btn btn-primary" href="/teacher/addcourse"
+            >Add new course</a
+          >
+        </div>
+
+        <div class="row">
+          {% for val in courses %}
+          <!-- <td>{{ val.name }}</td> -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div
+              class="cat-item position-relative overflow-hidden rounded mb-2"
+            >
+              <img class="img-fluid" src="/img/cat-1.jpg" alt="" />
+              <a
+                class="cat-overlay text-white text-decoration-none"
+                href="/teacher/coursedetails?id={{val.id}}"
+              >
+                <h4 class="text-white font-weight-medium">{{ val.name }}</h4>
+                <span>{{ val.start_date }} to {{ val.end_date }}</span>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- Category Start -->
+
+    {% include 'teacher/footer.html' %}
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+      ><i class="fa fa-angle-double-up"></i
+    ></a>
+  </body>
+</html>

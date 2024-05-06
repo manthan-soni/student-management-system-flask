@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  #Frontend Service
+  client:
+    container_name: flaskapp
+    build: .
+    ports:
+      - 5000:5000
+    environment:
+       MYSQL_DB: flaskDB
+       MYSQL_USER: root
+       MYSQL_PASSWORD: root
+       MYSQL_HOST: mysqldb
+       MYSQL_PORT: 3306
+    depends_on:
+      - mysqldb
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: flaskDB
+      MYSQL_root_PASSWORD: root
+
+    volumes:
+      - vol1:/var/lib/mysql
+
+volumes:
+  vol1:

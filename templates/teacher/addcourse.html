@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+
+  <body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+      <script>
+        alert("{{ message }}");
+      </script>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <!-- main -->
+    {% include 'teacher/navbar.html' %}
+    <!-- data -->
+
+    <!-- Header Start -->
+    <div class="container-fluid page-header" style="margin-bottom: 90px">
+      <div class="container">
+        <div
+          class="d-flex flex-column justify-content-center"
+          style="min-height: 300px"
+        >
+          <h3 class="display-4 text-white text-uppercase">Courses</h3>
+          <div class="d-inline-flex text-white">
+            <p class="m-0 text-uppercase">
+              <a class="text-white" href="">Home</a>
+            </p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">Courses</p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">Add course</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Courses Start -->
+    <div class="container-fluid py-5">
+      <div class="container py-5">
+        <div class="text-center mb-5">
+          <h5
+            class="text-primary text-uppercase mb-3"
+            style="letter-spacing: 5px"
+          >
+            Add course Details
+          </h5>
+        </div>
+        <div class="card-body rounded-bottom bg-primary p-5">
+          <form method="post">
+            <div class="form-group">
+              {{ form.hidden_tag() }}
+              <!-- id -->
+              {{ form.id(class_="form-control border-0 p-4") }} {% if
+              form.id.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.id.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {%endif%}
+            </div>
+            <!-- name -->
+            <div class="form-group">
+              {{ form.name(class_="form-control border-0 p-4")}} {% if
+              form.name.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.name.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {%endif%}
+            </div>
+            <!-- description -->
+            <div class="form-group">
+              {{ form.description(class_="form-control border-0 p-4") }} {% if
+              form.description.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.description.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {%endif%}
+            </div>
+            <!-- start_date -->
+            <div class="form-group">
+              {{ form.start_date(class_="form-control border-0 p-4") }} {% if
+              form.start_date.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.start_date.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {%endif%}
+            </div>
+            <!-- end_date -->
+            <div class="form-group">
+              {{ form.end_date(class_="form-control border-0 p-4") }} {% if
+              form.end_date.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.end_date.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {%endif%}
+            </div>
+            <!-- link -->
+            <div class="form-group">
+              {{ form.link(class_="form-control border-0 p-4") }} {% if
+              form.link.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.link.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {%endif%}
+            </div>
+            <input
+              type="submit"
+              value="Update"
+              class="btn btn-dark btn-block border-0 py-3"
+            />
+          </form>
+        </div>
+        <!-- <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="rounded overflow-hidden mb-2">
+              <img class="img-fluid" src="img/course-1.jpg" alt="" />
+              <div class="bg-secondary p-4">
+                <div class="d-flex justify-content-between mb-3">
+                  <small class="m-0"
+                    ><i class="fa fa-users text-primary mr-2"></i>25
+                    Students</small
+                  >
+                  <small class="m-0"
+                    ><i class="far fa-clock text-primary mr-2"></i>01h
+                    30m</small
+                  >
+                </div>
+                <a class="h5" href=""
+                  >Web design & development courses for beginner</a
+                >
+                <div class="border-top mt-4 pt-4">
+                  <div class="d-flex justify-content-between">
+                    <h6 class="m-0">
+                      <i class="fa fa-star text-primary mr-2"></i>4.5
+                      <small>(250)</small>
+                    </h6>
+                    <h5 class="m-0">$99</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <!-- Courses End -->
+
+    {% include 'teacher/footer.html' %}
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+      ><i class="fa fa-angle-double-up"></i
+    ></a>
+  </body>
+</html>

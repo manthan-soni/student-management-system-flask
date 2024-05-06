@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+
+  <body>
+    {% include 'pages/navbar.html' %}
+    <!-- Header Start -->
+    <div class="container-fluid page-header" style="margin-bottom: 90px">
+      <div class="container">
+        <div
+          class="d-flex flex-column justify-content-center"
+          style="min-height: 300px"
+        >
+          <h3 class="display-4 text-white text-uppercase">Courses</h3>
+          <div class="d-inline-flex text-white">
+            <p class="m-0 text-uppercase">
+              <a class="text-white" href="">Home</a>
+            </p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">Courses</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Search -->
+    <div class="container-fluid py-5 bg-secondary">
+      <div class="container pt-3 pb-3 ">
+        
+        <table class="w-100">
+          <tr>
+            <form>
+              <td> 
+               <div class="w-100 ">
+                 <div class="input-group">
+            <input
+              type="text"
+              class="form-control border-light"
+              style="padding: 30px"
+              placeholder="Search course"
+              id="word"
+              name="word"
+              required
+            />
+          </td>
+          <td>
+            <div class="input-group-append">
+              <div class="input-group-append">
+                <button class="btn btn-primary px-4 ml-1 p-3" type="submit"><i class="fa fa-search"></i></button>  
+                <button class="btn btn-primary px-4 ml-1 p-3" type="reset"><a href="/course" style="text-decoration: none; color: #fff;">reset</a></button>
+              </div>
+            </div>
+          </td>
+          </form>
+        </tr>
+        </table>
+        {% if word %}
+        <div class=" m-5">
+          <h1>
+          Course having : {{ word }}
+          </h1>
+          </div>
+        <div class="row">
+          {% for val in worddata %}
+          <!-- <td>{{ val.name }}</td> -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div
+              class="cat-item position-relative overflow-hidden rounded mb-2"
+            >
+              <img class="img-fluid" src="img/cat-1.jpg" alt="" />
+              <a
+                class="cat-overlay text-white text-decoration-none"
+                href="/enrollcourse?id={{val.id}}"
+              >
+                <h4 class="text-white font-weight-medium">{{ val.name }}</h4>
+                <span>Teacher Name : {{ val.profile.name }}</span>
+                <span>{{ val.start_date }} to {{ val.end_date }}</span>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- search end -->
+
+    <!-- Category Start -->
+    
+    <div class="container-fluid py-5">
+      <div class="container pt-5 pb-3">
+        <div class="text-center mb-5">
+          <h5
+            class="text-primary text-uppercase mb-3"
+            style="letter-spacing: 5px"
+          >
+            Subjects
+          </h5>
+          <h1>Explore All Courses</h1>
+          
+        </div>
+        <div class="row">
+          {% for val in courses %}
+          <!-- <td>{{ val.name }}</td> -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div
+              class="cat-item position-relative overflow-hidden rounded mb-2"
+            >
+              <img class="img-fluid" src="img/cat-1.jpg" alt="" />
+              <a
+                class="cat-overlay text-white text-decoration-none"
+                href="/enrollcourse?id={{val.id}}"
+              >
+                <h4 class="text-white font-weight-medium">{{ val.name }}</h4>
+                <span>Teacher Name : {{ val.profile.name }}</span>
+                <span>{{ val.start_date }} to {{ val.end_date }}</span>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="col-12">
+            <nav aria-label="Page navigation">
+              <ul
+                class="pagination pagination-lg justify-content-center mb-0"
+              >
+              {% if offset != 0 %}
+                <li class="page-item">
+                  <a class="page-link" href="/course?prev=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span>Previous</span>
+                  </a>
+                </li>
+              {% endif %}
+              {% if offset + 4 < totalcount  %}
+                <li class="page-item">
+                  <a class="page-link" href="/course?next=1" aria-label="Next">
+                    <span>Next</span>
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              {% endif %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Category Start -->
+
+    
+
+
+    <!-- Courses Start -->
+    <!-- <div class="container-fluid py-5">
+      <div class="container py-5">
+        <div class="text-center mb-5">
+          <h5
+            class="text-primary text-uppercase mb-3"
+            style="letter-spacing: 5px"
+          >
+            Courses
+          </h5>
+          <h1>Our Popular Courses</h1>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="rounded overflow-hidden mb-2">
+              <img class="img-fluid" src="img/course-1.jpg" alt="" />
+              <div class="bg-secondary p-4">
+                <div class="d-flex justify-content-between mb-3">
+                  <small class="m-0"
+                    ><i class="fa fa-users text-primary mr-2"></i>25
+                    Students</small
+                  >
+                  <small class="m-0"
+                    ><i class="far fa-clock text-primary mr-2"></i>01h
+                    30m</small
+                  >
+                </div>
+                <a class="h5" href=""
+                  >Web design & development courses for beginner</a
+                >
+                <div class="border-top mt-4 pt-4">
+                  <div class="d-flex justify-content-between">
+                    <h6 class="m-0">
+                      <i class="fa fa-star text-primary mr-2"></i>4.5
+                      <small>(250)</small>
+                    </h6>
+                    <h5 class="m-0">$99</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="rounded overflow-hidden mb-2">
+              <img class="img-fluid" src="img/course-2.jpg" alt="" />
+              <div class="bg-secondary p-4">
+                <div class="d-flex justify-content-between mb-3">
+                  <small class="m-0"
+                    ><i class="fa fa-users text-primary mr-2"></i>25
+                    Students</small
+                  >
+                  <small class="m-0"
+                    ><i class="far fa-clock text-primary mr-2"></i>01h
+                    30m</small
+                  >
+                </div>
+                <a class="h5" href=""
+                  >Web design & development courses for beginner</a
+                >
+                <div class="border-top mt-4 pt-4">
+                  <div class="d-flex justify-content-between">
+                    <h6 class="m-0">
+                      <i class="fa fa-star text-primary mr-2"></i>4.5
+                      <small>(250)</small>
+                    </h6>
+                    <h5 class="m-0">$99</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="rounded overflow-hidden mb-2">
+              <img class="img-fluid" src="img/course-3.jpg" alt="" />
+              <div class="bg-secondary p-4">
+                <div class="d-flex justify-content-between mb-3">
+                  <small class="m-0"
+                    ><i class="fa fa-users text-primary mr-2"></i>25
+                    Students</small
+                  >
+                  <small class="m-0"
+                    ><i class="far fa-clock text-primary mr-2"></i>01h
+                    30m</small
+                  >
+                </div>
+                <a class="h5" href=""
+                  >Web design & development courses for beginner</a
+                >
+                <div class="border-top mt-4 pt-4">
+                  <div class="d-flex justify-content-between">
+                    <h6 class="m-0">
+                      <i class="fa fa-star text-primary mr-2"></i>4.5
+                      <small>(250)</small>
+                    </h6>
+                    <h5 class="m-0">$99</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="rounded overflow-hidden mb-2">
+              <img class="img-fluid" src="img/course-4.jpg" alt="" />
+              <div class="bg-secondary p-4">
+                <div class="d-flex justify-content-between mb-3">
+                  <small class="m-0"
+                    ><i class="fa fa-users text-primary mr-2"></i>25
+                    Students</small
+                  >
+                  <small class="m-0"
+                    ><i class="far fa-clock text-primary mr-2"></i>01h
+                    30m</small
+                  >
+                </div>
+                <a class="h5" href=""
+                  >Web design & development courses for beginner</a
+                >
+                <div class="border-top mt-4 pt-4">
+                  <div class="d-flex justify-content-between">
+                    <h6 class="m-0">
+                      <i class="fa fa-star text-primary mr-2"></i>4.5
+                      <small>(250)</small>
+                    </h6>
+                    <h5 class="m-0">$99</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="rounded overflow-hidden mb-2">
+              <img class="img-fluid" src="img/course-5.jpg" alt="" />
+              <div class="bg-secondary p-4">
+                <div class="d-flex justify-content-between mb-3">
+                  <small class="m-0"
+                    ><i class="fa fa-users text-primary mr-2"></i>25
+                    Students</small
+                  >
+                  <small class="m-0"
+                    ><i class="far fa-clock text-primary mr-2"></i>01h
+                    30m</small
+                  >
+                </div>
+                <a class="h5" href=""
+                  >Web design & development courses for beginner</a
+                >
+                <div class="border-top mt-4 pt-4">
+                  <div class="d-flex justify-content-between">
+                    <h6 class="m-0">
+                      <i class="fa fa-star text-primary mr-2"></i>4.5
+                      <small>(250)</small>
+                    </h6>
+                    <h5 class="m-0">$99</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="rounded overflow-hidden mb-2">
+              <img class="img-fluid" src="img/course-6.jpg" alt="" />
+              <div class="bg-secondary p-4">
+                <div class="d-flex justify-content-between mb-3">
+                  <small class="m-0"
+                    ><i class="fa fa-users text-primary mr-2"></i>25
+                    Students</small
+                  >
+                  <small class="m-0"
+                    ><i class="far fa-clock text-primary mr-2"></i>01h
+                    30m</small
+                  >
+                </div>
+                <a class="h5" href=""
+                  >Web design & development courses for beginner</a
+                >
+                <div class="border-top mt-4 pt-4">
+                  <div class="d-flex justify-content-between">
+                    <h6 class="m-0">
+                      <i class="fa fa-star text-primary mr-2"></i>4.5
+                      <small>(250)</small>
+                    </h6>
+                    <h5 class="m-0">$99</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Courses End -->
+
+    {% include 'pages/footer.html' %}
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+      ><i class="fa fa-angle-double-up"></i
+    ></a>
+  </body>
+</html>

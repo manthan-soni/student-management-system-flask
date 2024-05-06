@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      .card {
+        padding-top: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 600px;
+        margin: auto;
+        margin-top: 100px;
+        text-align: center;
+      }
+
+      .card img {
+        align-self: center;
+      }
+
+      .title {
+        color: grey;
+        font-size: 18px;
+      }
+
+      button {
+        border: 1px solid;
+        border-radius: 5px;
+        outline: 0;
+        /* display: inline-block; */
+        padding: 8px;
+        color: white;
+        margin: 10px;
+        background-color: #ff6600;
+        text-align: center;
+        cursor: pointer;
+        width: 80%;
+        /* border-width: 10px; */
+        font-size: 18px;
+      }
+
+      .card a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
+      }
+
+      .card h1,
+      p {
+        margin: 5px;
+      }
+
+      .card button:hover,
+      a:hover {
+        opacity: 0.7;
+      }
+
+      .enrollcourse {
+        padding-top: 10px;
+        box-shadow: 0 8px 8px 8px rgba(0, 0, 0, 0.2);
+        max-width: 80%;
+        margin: auto;
+        margin-top: 50px;
+        text-align: center;
+        align-items: center;
+      }
+
+      .enrollcourse .row {
+        padding-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'pages/navbar.html' %}
+    <!-- Student Profile -->
+    <div class="card">
+      {%if data.profile_photo == "" %}
+      <img src="/img/student.png" alt="{{ data.name }}" style="width: 30%" />
+      {% else %}
+      <img
+        src="/uploads/{{data.profile_photo}}"
+        alt="{{ data.name }}"
+        style="width: 30%"
+      />
+
+      {%endif%}
+      <h1>{{ data.name }}</h1>
+      <p class="title">{{ data.designation }}</p>
+      <p>Contact Number : {{ data.contact_no }}</p>
+      <p>Contact Number : {{ data.email }}</p>
+      <p>Username : {{ data.username }}</p>
+      <!-- <a href="#"><i class="fa fa-book-open mr-2"></i></a>
+      <a href="#"><i class="fa fa-twitter mr-2"></i></a>
+      <a href="#"><i class="fa fa-linkedin"></i></a>
+      <a href="#"><i class="fa-solid fa-file-invoice"></i></a> -->
+      <!-- <a href="/logout"><button>Logout</button></a> -->
+    </div>
+    <div class="enrollcourse">
+      <h4>Enrolled Courses</h4>
+      {% if course %}
+      <div class="row">
+        {% for val in course%}
+        <!-- <td>{{ val.name }}</td> -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="cat-item position-relative overflow-hidden rounded mb-2">
+            <img class="img-fluid" src="img/cat-1.jpg" alt="" />
+            <a class="cat-overlay text-white text-decoration-none" href="#">
+              <h4 class="text-white font-weight-medium">{{ val[1] }}</h4>
+              <span>{{ val[3] }} to {{ val[4] }}</span>
+              <span>Teacher name : {{ val[6] }}</span>
+            </a>
+          </div>
+          <form action="/coursePlay" method="post">
+            <input type="hidden" value="{{val[0]}}" name="cid" />
+            <input type="hidden" value="{{ val[5] }}" name="link" />
+            <input type="hidden" value="{{ val[1] }}" name="coursename" />
+            <input
+              type="submit"
+              value="Open"
+              class="btn btn-primary py-2 px-4 ml-auto"
+            />
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>No course enrolled</p>
+      {%endif%}
+    </div>
+    {% include 'pages/footer.html' %}
+  </body>
+</html>
