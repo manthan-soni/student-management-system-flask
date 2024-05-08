@@ -1,8 +1,8 @@
 '''Server file'''
 from app import create_app
-
 app = create_app()
 
 # main function
 if __name__ == "__main__":
+    print("======================")
     app.run(debug=True, host="0.0.0.0", port=5000)

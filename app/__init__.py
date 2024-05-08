@@ -11,9 +11,14 @@ import os
 
 
 def create_app():
+    print("====================1")
 
     Session(app)
+    print("====================2")
+
     create_db()
+    print("====================3")
+
     upload_folder = 'static/uploads'
 
     app.config['UPLOAD_FOLDER'] = upload_folder

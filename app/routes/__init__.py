@@ -17,7 +17,7 @@ from app.forms.auth import LoginForm, RegistrationForm
 from app.forms.teacher import CourseDetails
 from app.model.auth import Profile, Course, Enrollments
 from app.extensions.db import app,mail
-from app.extensions import db
+from app.extensions.db import db
 
 # sessions defined
 # session['name']

@@ -1,8 +1,7 @@
-from app.extensions import db
+from app.extensions.db import db
 from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey
 from flask_msearch import Search
-
 
 class Profile(db.Model):
     ''' Model class '''

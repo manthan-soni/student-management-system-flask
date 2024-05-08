@@ -9,12 +9,15 @@ from flask_mail import Mail
 
 SECRET_KEY = os.urandom(32)
 
+print("===============================")
 app = Flask(
     __name__,
     template_folder="../../templates",
     static_folder="../../static",
     static_url_path="/",
 )
+
+
 
 # name = os.environ.get('MYSQL_HOST','localhost')
 
@@ -37,6 +40,7 @@ app.config['SESSION_TYPE'] = "filesystem"
 
 app.config['SECRET_KEY'] = SECRET_KEY
 
+
 # configuration of mail 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -46,15 +50,27 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
+print("===============================")
+
+
+print("===============end================")
+
+
 db = SQLAlchemy(app)
+
+search = Search(db=db)
+search.init_app(app)
+
+
+
 # db.init_app(app)
 
-search = Search()
-search.init_app(app)
 
 def create_db():
     ''' it will create model table if not exist.'''
     from app.model.auth import Profile, Course, Enrollments
 
     with app.app_context():
+        # db.init_app(app1)
         db.create_all()
+        
