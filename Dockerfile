@@ -2,9 +2,9 @@ FROM python:3.8.10
 
 WORKDIR /flask-app
 
-COPY requirement.txt .
+COPY requirements.txt .
 
-RUN  pip3 install -r requirement.txt
+RUN  pip3 install -r requirements.txt
 
 COPY . .
 
